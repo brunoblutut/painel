@@ -47,8 +47,8 @@ apt-get install mariadb-server -y
 	apt-get install cron -y
 	apt-get install git -y
 	service apache2 restart
-	mysql -h localhost -u root -proot -e "grant all privileges on *.* to root@'localhost' identified by 'root'; commit;flush privileges;"
-	mysql -h localhost -u root -proot -e "CREATE DATABASE plus"
+	mysql -h localhost -u root -p$sn -e "grant all privileges on *.* to root@'localhost' identified by 'root'; commit;flush privileges;"
+	mysql -h localhost -u root -p$dn -e "CREATE DATABASE plus"
 	cd /var/www/html
 	mysql -p -u root -p$sn plus < plus.sql
 	cd /root
@@ -61,6 +61,8 @@ apt-get install mariadb-server -y
 	echo "* * * * * /usr/bin/php5 /var/www/html/pages/system/cron.online.ssh.php" >> /var/spool/cron/crontabs/root
 	echo "10 * * * * /usr/bin/php5 /var/www/html/pages/system/cron.servidor.php" >> /var/spool/cron/crontabs/root
 	cd /var/www/html/pages/system/
+	/etc/init.d/cron reload > /dev/null 2>&1
+	/etc/init.d/cron restart > /dev/null 2>&1
 	chmod 7777 cron.php 
 	chmod 7777 cron.ssh.php 
 	chmod 7777 cron.sms.php 
@@ -110,12 +112,9 @@ apt-get install mariadb-server -y
 	cd /var/www/html/admin/pages/contas
 	chmod 7777 online.php
 	clear
-	echo -e "\033[1;35mAgora vamos configurar data e hora\033[0m"
-	echo -e "\033[1;31mEscolha \033[01;37mAMERICA\033[0m"
-	echo -e "\033[1;31mDepois \033[01;37mSÃO PAULO\033[0m"
-	echo -e "\033[1;31mAguarde...\033[0m"
-	sleep 10
-	dpkg-reconfigure tzdata 
+	echo "America/Mexico_City" > /etc/timezone
+ln -fs /usr/share/zoneinfo/America/Mexico_City /etc/localtime > /dev/null 2>&1
+	dpkg-reconfigure --frontend noninteractive tzdata > /dev/null 2>&1
 	cat /dev/null > ~/.bash_history && history -c && clear
 	clear
 
@@ -130,7 +129,7 @@ apt-get install mariadb-server -y
 	echo -e "\033[1;31mDuvidas: \033[01;37m@drakowisky\033[0m"
 	echo -e "\033[1;31mBom uso!\033[0m"
 	cd /root
-	rm painel7.sh > /dev/null
+	rm paine* > /dev/null
 	cd /tmp
 	rm 1.db > /dev/null
 cd /root
@@ -144,6 +143,6 @@ else
 	figlet DRAKOWISKY
 	echo -e "\033[1;41m/////////////////////////////////////////////////////////////////////\033[0m"
 	rm /tmp/1.db
-  rm painel7.sh
+  rm painel*
 	sleep 4
 fi
