@@ -48,7 +48,7 @@ apt-get install mariadb-server -y
 	apt-get install git -y
 	service apache2 restart
 	mysql -h localhost -u root -p$sn -e "grant all privileges on *.* to root@'localhost' identified by 'root'; commit;flush privileges;"
-	mysql -h localhost -u root -p$dn -e "CREATE DATABASE plus"
+	mysql -h localhost -u root -p$sn -e "CREATE DATABASE plus"
 	cd /var/www/html
 	mysql -p -u root -p$sn plus < plus.sql
 	cd /root
@@ -109,6 +109,7 @@ apt-get install mariadb-server -y
 	cd /var/www/html/pages/contas
 	chmod 7777 online.php
 	cd /root
+        sed -i "s;suasenha;$sn;g" /var/www/html/pages/system/pass.php > /dev/null 2>&1
 	cd /var/www/html/admin/pages/contas
 	chmod 7777 online.php
 	clear
