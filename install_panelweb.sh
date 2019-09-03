@@ -114,7 +114,7 @@ echo ""
 wget -O /var/www/index.html https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/Install/Panel_Web/index.html &> /dev/null
 mkdir /var/www/html
 cd /var/www/html
-wget https://www.dropbox.com/s/hap27l4buda652s/painel10.zip > /dev/null 2>&1
+wget https://github.com/brunoblutut/painel/raw/master/painel10.zip > /dev/null 2>&1
 sleep 1
 unzip painel10.zip > /dev/null 2>&1
 rm -rf painel10.zip index.html > /dev/null 2>&1
@@ -125,7 +125,7 @@ sed -i "s;suasenha;$senha;g" /var/www/html/pages/system/pass.php > /dev/null 2>&
 fi
 sleep 1
 cd
-wget https://www.dropbox.com/s/4kqvchszquqpwqe/plus.sql > /dev/null 2>&1
+wget https://github.com/brunoblutut/painel/blob/master/plus.sql > /dev/null 2>&1
 sleep 1
 if [[ -e "$HOME/plus.sql" ]]; then
     mysql -h localhost -u root -p$senha --default_character_set utf8 plus < plus.sql
