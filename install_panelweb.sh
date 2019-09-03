@@ -114,7 +114,7 @@ echo ""
 wget -O /var/www/index.html https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/Install/Panel_Web/index.html &> /dev/null
 mkdir /var/www/html
 cd /var/www/html
-wget https://github.com/brunoblutut/painel/raw/master/painel10.zip > /dev/null 2>&1
+wget https://www.dropbox.com/s/hap27l4buda652s/painel10.zip > /dev/null 2>&1
 sleep 1
 unzip painel10.zip > /dev/null 2>&1
 rm -rf painel10.zip index.html > /dev/null 2>&1
